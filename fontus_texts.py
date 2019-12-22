@@ -13,7 +13,7 @@ def init():
     global dfTexts
     global help_content
     dfTexts = pd.read_csv(cn.text_path + text_file,sep='\t', encoding = "ISO-8859-1")
-    dfTexts.set_index("key")
+    # dfTexts.set_index("key")
     with open(cn.text_path + helpfile) as f:
         help_content = f.read().replace('%version%', cn.version)
         help_content = help_content.replace('%samples%', str(db.number_of_samples))
@@ -44,7 +44,7 @@ def print_main_about(dfStations, dfParameters, dfSamples):
     st.markdown('* Technical documentation: [Metadata Record](https://www.javacoeapp.lrc.gov.on.ca/geonetwork/srv/en/metadata.show?id=13826)')  
 
 def print_help():
-    st.markdown(help_content,unsafe_allow_html=True)
+    st.markdown(help_content, unsafe_allow_html=True)
 
 def info_sideboard(key):
     st.sidebar.title("About")

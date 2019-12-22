@@ -4,13 +4,16 @@ import fontus_db as db
 
 dfParameters = pd.DataFrame
 dfSamples = pd.DataFrame
+all_parameters_list = []
 
 def init(dfPar, dfSam):
     global dfParameters
-    global dfSamples
+    global dfSamplesglobal
+    global all_rivers_list
 
     dfParameters = dfPar
     dfSamples = dfSam
+    all_parameters_list = get_parameters(db.dfParameters)
 
 def get_table(all_rivers_sel, rivers_sel):
     global dfParameters
@@ -26,7 +29,7 @@ def get_table(all_rivers_sel, rivers_sel):
 
 def get_parameters(df):
     result = df.PARM_DESCRIPTION.unique()
-    result.sort()
+    result.sort('PARM_DESCRIPTION')
     return result
 
 def get_sample_parameters(rivers_sel):
@@ -37,6 +40,7 @@ def get_sample_parameters(rivers_sel):
     # filter the parameter table to include only parameters from the filtered sample list
     result = db.dfParameters[(db.dfParameters['PARM'].isin(lst_par))]
     result = result.PARM_DESCRIPTION
+
     return result.tolist()
 
 # returns the key for a given parameter description. the lists hold parameter descriptions, so they are easier to understand
